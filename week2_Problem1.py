@@ -5,8 +5,10 @@ Created on Sat Apr 28 23:30:59 2018
 
 @author: shreyas
 """
+
+"""
 #Problem 1
-balance = 5000
+balance = 5000     
 annualInterestRate = 0.18
 monthlyPaymentRate = 0.02
 
@@ -27,20 +29,23 @@ while remainingBalance > 0:
     for month in range(12):
         remainingBalance = (remainingBalance - monthlyPayment) + ((annualInterestRate/12) * (remainingBalance - monthlyPayment))
 print("Lowest Payment: " + str(monthlyPayment))
+"""
 
 #Problem 3
 annualInterestRate = 0.18
-balance = 10000
-lowerBound = round(balance/12, 2)
-upperBound = round(balance*(1+(annualInterestRate/12))^(12), 2)
+balance = 999999
+lowerBound = balance/12
+upperBound = (balance*((1+(annualInterestRate/12))**12))/12
 monthlyPayment = round((lowerBound + upperBound)/2, 2)
 remainingBalance = balance
-while remainingBalance != 0:
+while remainingBalance > 0 or remainingBalance < -0.12:
     remainingBalance = balance
-    monthlyPayment += 0.01
     for month in range(12):
-        remainingBalance = (remainingBalance - monthlyPayment) + ((annualInterestRate/12) * (remainingBalance - monthlyPayment))
-    
-    if remainingBalance < 
-    
-print("Lowest Payment: " + str(monthlyPayment))
+        remainingBalance = (remainingBalance - monthlyPayment) + ((annualInterestRate/12) * (remainingBalance - monthlyPayment))    
+    if remainingBalance > 0:
+        lowerBound = monthlyPayment
+        monthlyPayment = (lowerBound + upperBound)/2
+    elif remainingBalance < -0.12:
+        upperBound = monthlyPayment
+        monthlyPayment = (lowerBound + upperBound)/2
+print("Lowest Payment: " + str(round(monthlyPayment, 2)))
